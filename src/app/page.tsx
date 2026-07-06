@@ -4,7 +4,7 @@ import Contacto from '@/components/Contacto';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 selection:bg-teal-500 selection:text-slate-950">
+    <main className="min-h-screen bg-slate-950 text-slate-100">
       {/* Contenedor centralizado y responsivo */}
       <div className="max-w-5xl mx-auto px-6 py-12 space-y-24">
         

@@ -1,3 +1,61 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@source "../components";
+@source "../data";
+
+/* Custom easing curves — Emil Kowalski philosophy */
+:root {
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@theme {
+  --animate-fade-in-up: fade-in-up 500ms var(--ease-out-strong) both;
+  --animate-fade-in: fade-in 400ms var(--ease-out-strong) both;
+  --animate-scale-in: scale-in 350ms var(--ease-out-strong) both;
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--color-teal-500);
+  color: var(--color-slate-950);
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-slate-950); }
+::-webkit-scrollbar-thumb { background: var(--color-slate-800); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-slate-700); }
+
+/* Clases de retardo para animaciones */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Reduced motion — keep opacity/color, remove movement */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
