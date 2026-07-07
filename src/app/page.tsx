@@ -1,12 +1,13 @@
 import Hero from '@/components/Hero';
 import Proyectos from '@/components/Proyectos';
 import Contacto from '@/components/Contacto';
+import HeroCanvas from '@/components/HeroCanvas';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100">
-      {/* Contenedor centralizado y responsivo */}
-      <div className="max-w-5xl mx-auto px-6 py-12 space-y-24">
+    <main className="relative min-h-screen bg-slate-950 text-slate-100">
+      <HeroCanvas />
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-12 space-y-24">
         
         <Hero />
         

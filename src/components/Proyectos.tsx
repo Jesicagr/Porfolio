@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { proyectosDatos } from '@/data/proyectos';
+import ProjectScene3D from '@/components/ProjectScene3D';
 
 export default function Proyectos() {
   return (
@@ -27,8 +28,9 @@ function ProyectoCard({ proyecto, index }: { proyecto: typeof proyectosDatos[num
 
   return (
     <div 
-      className={`animate-fade-in-up ${delays[index % delays.length]} p-6 rounded-xl bg-slate-900/50 border border-slate-800/60 transition-[transform,border-color,box-shadow] duration-200 ease-out active:scale-[0.98] motion-safe:hover:border-teal-500/30 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-lg motion-safe:hover:shadow-teal-500/5 group flex flex-col justify-between`}
+      className={`animate-fade-in-up ${delays[index % delays.length]} relative p-6 rounded-xl bg-slate-900/50 border border-slate-800/60 transition-[transform,border-color,box-shadow] duration-200 ease-out active:scale-[0.98] motion-safe:hover:border-teal-500/30 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-lg motion-safe:hover:shadow-teal-500/5 group flex flex-col justify-between`}
     >
+      <ProjectScene3D index={index} />
       <div className="space-y-4">
         <h3 className="text-xl font-semibold text-slate-100 motion-safe:group-hover:text-teal-400 transition-colors duration-200 ease-out">
           {proyecto.titulo}

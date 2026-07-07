@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import HeroGeometry from '@/components/HeroGeometry';
 
 export default function Hero() {
   return (
-    <section className="pt-20 pb-10 flex flex-col items-start gap-6">
+    <section className="relative pt-20 pb-10 flex flex-col items-start gap-6">
       {/* Badge de Disponibilidad */}
       <div className="animate-fade-in-up inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 text-sm font-medium border border-teal-500/20">
         <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
@@ -28,6 +29,8 @@ export default function Hero() {
           Escribime
         </Link>
       </div>
+
+      <HeroGeometry />
     </section>
   );
 }
