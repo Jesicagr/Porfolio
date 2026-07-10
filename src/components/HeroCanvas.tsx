@@ -160,6 +160,7 @@ export default function HeroCanvas() {
       }
 
       animate();
+      c.style.opacity = '1';
 
       cleanup = () => {
         window.removeEventListener('mousemove', onMouseMove);
@@ -185,7 +186,7 @@ export default function HeroCanvas() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 -z-10"
+      className="fixed inset-0 -z-10 opacity-0 transition-opacity duration-700"
       aria-hidden="true"
     />
   );
