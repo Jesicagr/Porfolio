@@ -44,7 +44,7 @@ export default function Contacto() {
           <div>
             <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Redes</h3>
             <div className="flex flex-col gap-2 mt-2">
-              <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noreferrer" className="text-slate-300 transition-[color] duration-150 ease-out motion-safe:hover:text-teal-400 inline-flex items-center gap-1 group/link active:scale-[0.97]">
+              <a href="https://www.linkedin.com/in/jesiaguirre" target="_blank" rel="noreferrer" className="text-slate-300 transition-[color] duration-150 ease-out motion-safe:hover:text-teal-400 inline-flex items-center gap-1 group/link active:scale-[0.97]">
                 LinkedIn <span className="inline-block transition-transform duration-150 ease-out motion-safe:group-hover/link:translate-x-0.5 motion-safe:group-hover/link:-translate-y-0.5">↗</span>
               </a>
               <a href="https://github.com/tu-usuario" target="_blank" rel="noreferrer" className="text-slate-300 transition-[color] duration-150 ease-out motion-safe:hover:text-teal-400 inline-flex items-center gap-1 group/link active:scale-[0.97]">

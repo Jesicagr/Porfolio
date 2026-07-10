@@ -184,6 +184,7 @@ export default function HeroGeometry() {
       }
 
       animate();
+      c.style.opacity = '1';
 
       cleanup = () => {
         window.removeEventListener('resize', onResize);
@@ -206,7 +207,7 @@ export default function HeroGeometry() {
   return (
     <div
       ref={containerRef}
-      className="hidden md:block absolute right-0 lg:right-4 top-1/2 -translate-y-1/2 w-56 h-56 lg:w-72 lg:h-72"
+      className="hidden md:block absolute right-0 lg:right-4 top-1/2 -translate-y-1/2 w-56 h-56 lg:w-72 lg:h-72 opacity-0 transition-opacity duration-700"
       aria-hidden="true"
     />
   );

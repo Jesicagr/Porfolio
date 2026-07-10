@@ -1,4 +1,4 @@
-import HeroGeometry from '@/components/HeroGeometry';
+import LazyHeroGeometry from '@/components/LazyHeroGeometry';
 
 export default function Hero() {
   return (
@@ -29,7 +29,7 @@ export default function Hero() {
         </a>
       </div>
 
-      <HeroGeometry />
+      <LazyHeroGeometry />
     </section>
   );
 }
