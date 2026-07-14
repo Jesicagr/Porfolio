@@ -13,22 +13,23 @@ export interface Proyecto {
   export const proyectosDatos: Proyecto[] = [
     {
       id: 1,
-      titulo: "RealState Cloud",
-      descripcion: "SaaS white-label multi-tenant para inmobiliarias con landing, checkout por suscripción, panel de administración y gestión de propiedades.",
-      desafio: "Implementar multi-tenancy con aprovisionamiento automático de tenants, checkout vía Mercado Pago y validación de subdominios en tiempo real.",
-      solucion: "Arquitectura SaaS con Next.js 16 App Router, Supabase (PostgreSQL), NextAuth v4, Mercado Pago (subscriptions), Framer Motion, trilingüe (es/ en/pt) y Docker.",
-      tecnologias: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Mercado Pago", "NextAuth", "Docker"],
+      titulo: "INMO — Sistema de Gestión Inmobiliaria",
+      descripcion: "Plataforma web full-stack para la administración integral de inmobiliarias con CRM, multitenant y panel de administración.",
+      desafio: "Arquitectura multitenant con resolución dinámica por dominio, aislamiento de datos y sincronización B2B.",
+      solucion: "Se desarrolló con Next.js 16, React 19, Prisma y PostgreSQL en una VPS con Nginx, integrando Supabase Storage, Cloudflare y PWA.",
+      tecnologias: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma", "Supabase", "NextAuth"],
       stack: {
-        Frontend: "Next.js 16, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Leaflet, Swiper",
-        Backend: "API Routes de Next.js, Supabase (PostgreSQL)",
-        Pago: "Mercado Pago (checkout + subscriptions)",
-        "Multi-tenant": "Subdominios dinámicos, aprovisionamiento automático",
-        "Multi-idioma": "Español, Inglés, Portugués",
-        Infra: "Docker, realstate.cloud",
-        Testing: "Playwright (E2E), Vitest (unit)",
-        Emails: "Resend"
+        Frontend: "Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/ui",
+        Backend: "API Routes de Next.js, Prisma ORM",
+        "Base de datos": "PostgreSQL",
+        Almacenamiento: "Supabase Storage",
+        Infraestructura: "Hostinger VPS + Nginx + PM2",
+        "CDN/Seguridad": "Cloudflare (DNS, proxy, SSL)",
+        Autenticación: "NextAuth + bcryptjs",
+        Testing: "Playwright, Jest",
+        DevOps: "Docker, SSL automatizado (Certbot)"
       },
-      linkDemo: "https://realstate.cloud"
+      linkDemo: "https://dithurbide.org"
     },
     {
       id: 2,
@@ -50,22 +51,21 @@ export interface Proyecto {
     },
     {
       id: 3,
-      titulo: "INMO — Sistema de Gestión Inmobiliaria",
-      descripcion: "Plataforma web full-stack para la administración integral de inmobiliarias con CRM, multitenant y panel de administración.",
-      desafio: "Arquitectura multitenant con resolución dinámica por dominio, aislamiento de datos y sincronización B2B.",
-      solucion: "Se desarrolló con Next.js 16, React 19, Prisma y PostgreSQL en una VPS con Nginx, integrando Supabase Storage, Cloudflare y PWA.",
-      tecnologias: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma", "Supabase", "NextAuth"],
+      titulo: "RealState Cloud",
+      descripcion: "SaaS white-label multi-tenant para inmobiliarias con landing, checkout por suscripción, panel de administración y gestión de propiedades.",
+      desafio: "Implementar multi-tenancy con aprovisionamiento automático de tenants, checkout vía Mercado Pago y validación de subdominios en tiempo real.",
+      solucion: "Arquitectura SaaS con Next.js 16 App Router, Supabase (PostgreSQL), NextAuth v4, Mercado Pago (subscriptions), Framer Motion, trilingüe (es/ en/pt) y Docker.",
+      tecnologias: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Mercado Pago", "NextAuth", "Docker"],
       stack: {
-        Frontend: "Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/ui",
-        Backend: "API Routes de Next.js, Prisma ORM",
-        "Base de datos": "PostgreSQL",
-        Almacenamiento: "Supabase Storage",
-        Infraestructura: "Hostinger VPS + Nginx + PM2",
-        "CDN/Seguridad": "Cloudflare (DNS, proxy, SSL)",
-        Autenticación: "NextAuth + bcryptjs",
-        Testing: "Playwright, Jest",
-        DevOps: "Docker, SSL automatizado (Certbot)"
+        Frontend: "Next.js 16, React 19, TypeScript, Tailwind CSS 4, Framer Motion, Leaflet, Swiper",
+        Backend: "API Routes de Next.js, Supabase (PostgreSQL)",
+        Pago: "Mercado Pago (checkout + subscriptions)",
+        "Multi-tenant": "Subdominios dinámicos, aprovisionamiento automático",
+        "Multi-idioma": "Español, Inglés, Portugués",
+        Infra: "Docker, realstate.cloud",
+        Testing: "Playwright (E2E), Vitest (unit)",
+        Emails: "Resend"
       },
-      linkDemo: "https://dithurbide.org"
+      linkDemo: "https://realstate.cloud"
     }
   ];
