@@ -3,23 +3,24 @@
 import { FormEvent, useState } from 'react';
 
 export default function Contacto() {
-  const [enviado, setEnviado] = useState(false);
+  const [succeeded, setSucceeded] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    
-    // Simulación de envío (Acá conectarías la URL de tu servicio de formularios)
-    const formData = new FormData(form);
-    
-    // Ejemplo con Formspree (Descomentar cuando tengas tu ID):
-    // await fetch('https://formspree.io/f/TU_ID_AQUI', {
-    //   method: 'POST',
-    //   body: formData,
-    //   headers: { 'Accept': 'application/json' }
-    // });
+    setSubmitting(true);
 
-    setEnviado(true);
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    await fetch('https://formspree.io/f/xjgnkykn', {
+      method: 'POST',
+      body: data,
+      headers: { Accept: 'application/json' },
+    });
+
+    setSubmitting(false);
+    setSucceeded(true);
     form.reset();
   };
 
@@ -56,7 +57,7 @@ export default function Contacto() {
 
         {/* Formulario */}
         <div className="animate-fade-in-up delay-200 md:col-span-2 bg-slate-900/40 border border-slate-800/60 p-6 rounded-xl">
-          {enviado ? (
+          {succeeded ? (
             <div className="animate-scale-in h-full flex flex-col items-center justify-center text-center p-6 space-y-3">
               <div className="w-12 h-12 rounded-full bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold">
                 ✓
@@ -64,7 +65,7 @@ export default function Contacto() {
               <h3 className="text-lg font-semibold text-slate-100">¡Mensaje enviado con éxito!</h3>
               <p className="text-sm text-slate-400">Gracias por escribir. Te responderé lo antes posible.</p>
               <button 
-                onClick={() => setEnviado(false)} 
+                type="button"
                 className="text-xs text-teal-400 transition-[color] duration-150 ease-out motion-safe:hover:text-teal-300 pt-2 active:scale-[0.97]"
               >
                 Enviar otro mensaje
@@ -110,9 +111,10 @@ export default function Contacto() {
 
               <button
                 type="submit"
-                className="w-full md:w-auto px-6 py-3 rounded-lg bg-teal-500 text-slate-950 font-medium transition-[transform,background,box-shadow] duration-150 ease-out active:scale-[0.97] motion-safe:hover:bg-teal-400 motion-safe:hover:shadow-lg motion-safe:hover:shadow-teal-500/25 text-sm"
+                disabled={submitting}
+                className="w-full md:w-auto px-6 py-3 rounded-lg bg-teal-500 text-slate-950 font-medium transition-[transform,background,box-shadow] duration-150 ease-out active:scale-[0.97] motion-safe:hover:bg-teal-400 motion-safe:hover:shadow-lg motion-safe:hover:shadow-teal-500/25 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Enviar mensaje
+                {submitting ? 'Enviando...' : 'Enviar mensaje'}
               </button>
             </form>
           )}
