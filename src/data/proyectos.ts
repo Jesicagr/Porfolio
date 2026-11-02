@@ -69,3 +69,45 @@ export interface Proyecto {
       linkDemo: "https://realstate.cloud"
     }
   ];
+
+export interface Tecnologia {
+  nombre: string;
+}
+
+export interface CategoriaTecnologias {
+  titulo: string;
+  items: Tecnologia[];
+}
+
+export const tecnologiasDatos: CategoriaTecnologias[] = [
+  {
+    titulo: "Frontend",
+    items: [
+      { nombre: "Next.js" },
+      { nombre: "React" },
+      { nombre: "Angular" },
+      { nombre: "TypeScript" },
+      { nombre: "Tailwind CSS" },
+      { nombre: "shadcn/ui" },
+      { nombre: "Framer Motion" },
+      { nombre: "Swiper" },
+      { nombre: "Leaflet" },
+    ],
+  },
+  {
+    titulo: "Backend",
+    items: [
+      { nombre: "Java" },
+      { nombre: "Spring Boot" },
+      { nombre: "Spring Security + JWT" },
+      { nombre: "Spring Data JPA" },
+      { nombre: "Prisma" },
+      { nombre: "Supabase" },
+      { nombre: "NextAuth" },
+      { nombre: "PostgreSQL" },
+      { nombre: "Docker" },
+      { nombre: "Nginx + PM2" },
+      { nombre: "Cloudflare" },
+    ],
+  },
+];
