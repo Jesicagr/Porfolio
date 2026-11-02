@@ -1,13 +1,12 @@
-'use client';
-
 import { tecnologiasDatos } from '@/data/proyectos';
 
 export default function Tecnologias() {
   return (
     <section id="tecnologias" className="space-y-8">
       <div className="animate-fade-in-up">
-        <h2 className="text-2xl font-bold tracking-tight">Tecnologías</h2>
-        <p className="text-slate-400">Las herramientas y tecnologías con las que trabajo.</p>
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-teal-400">Stack</p>
+        <h2 className="mt-2 text-3xl md:text-4xl font-bold tracking-tight">Tecnologías</h2>
+        <p className="mt-2 text-slate-400">Las herramientas con las que trabajo día a día.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

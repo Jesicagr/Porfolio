@@ -6,6 +6,7 @@ export interface Proyecto {
     solucion: string;
     tecnologias: string[];
     stack?: Record<string, string>;
+    imagen?: string;
     linkDemo?: string;
     linkGithub?: string;
   }

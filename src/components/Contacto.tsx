@@ -38,8 +38,9 @@ export default function Contacto() {
   return (
     <section id="contacto" className="space-y-8 pb-12">
       <div className="animate-fade-in-up">
-        <h2 className="text-2xl font-bold tracking-tight">Hablemos</h2>
-        <p className="text-slate-400">
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-teal-400">Contacto</p>
+        <h2 className="mt-2 text-3xl md:text-4xl font-bold tracking-tight">Hablemos</h2>
+        <p className="mt-2 text-slate-400">
           ¿Tenés una propuesta de trabajo, una consulta o una idea en mente? Escribime.
         </p>
       </div>
