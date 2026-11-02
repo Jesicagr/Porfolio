@@ -1,22 +1,25 @@
 import LazyHeroCanvas from '@/components/LazyHeroCanvas';
+import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import Tecnologias from '@/components/Tecnologias';
 import Proyectos from '@/components/Proyectos';
 import Contacto from '@/components/Contacto';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-slate-950 text-slate-100">
-      <LazyHeroCanvas />
-      <div className="relative z-10 max-w-5xl mx-auto px-6 py-12 space-y-24">
-        
-        <Hero />
-        
-        <Proyectos />
-        
-        {/* <Tecnologias /> */}
-        <Contacto />
-        
-      </div>
-    </main>
+    <>
+      <Header />
+      <main id="top" className="relative min-h-screen text-slate-100">
+        <LazyHeroCanvas />
+        <div className="relative z-10 max-w-5xl mx-auto px-6 py-12 space-y-24">
+          <Hero />
+          <Tecnologias />
+          <Proyectos />
+          <Contacto />
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 }

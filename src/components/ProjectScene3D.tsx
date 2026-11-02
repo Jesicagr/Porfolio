@@ -5,11 +5,13 @@ import type { BufferGeometry } from 'three';
 
 interface Props {
   index: number;
+  size?: number;
+  className?: string;
 }
 
 const SHAPES = ['cube', 'octahedron', 'dodecahedron'] as const;
 
-export default function ProjectScene3D({ index }: Props) {
+export default function ProjectScene3D({ index, size = 72, className = '' }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isVisibleRef = useRef(false);
 
@@ -44,7 +46,7 @@ export default function ProjectScene3D({ index }: Props) {
       camera.position.z = 3;
 
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      renderer.setSize(72, 72);
+      renderer.setSize(size, size);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       c.appendChild(renderer.domElement);
 
@@ -80,12 +82,16 @@ export default function ProjectScene3D({ index }: Props) {
       const fill = new THREE.Mesh(geometry, fillMat);
       scene.add(fill);
 
+      const prefersReduced = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches;
+
       let speed = 0.002;
 
       function animate() {
         animationId = requestAnimationFrame(animate);
 
-        const target = isVisibleRef.current ? 0.01 : 0.0015;
+        const target = prefersReduced ? 0 : isVisibleRef.current ? 0.01 : 0.0015;
         speed += (target - speed) * 0.04;
 
         wireframe.rotation.x += speed * 0.5;
@@ -112,12 +118,13 @@ export default function ProjectScene3D({ index }: Props) {
 
     init();
     return () => cleanup();
-  }, [index]);
+  }, [index, size]);
 
   return (
     <div
       ref={containerRef}
-      className="absolute top-3 right-3 w-[72px] h-[72px] opacity-40 motion-safe:group-hover:opacity-70 transition-opacity duration-300"
+      className={className}
+      style={{ width: size, height: size }}
       aria-hidden="true"
     />
   );

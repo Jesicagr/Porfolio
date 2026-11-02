@@ -5,30 +5,42 @@ import { FormEvent, useState } from 'react';
 export default function Contacto() {
   const [succeeded, setSucceeded] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
+    setError(null);
 
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    await fetch('https://formspree.io/f/xjgnkykn', {
-      method: 'POST',
-      body: data,
-      headers: { Accept: 'application/json' },
-    });
+    try {
+      const response = await fetch('https://formspree.io/f/xjgnkykn', {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      });
 
-    setSubmitting(false);
-    setSucceeded(true);
-    form.reset();
+      if (!response.ok) {
+        throw new Error('No se pudo enviar el mensaje.');
+      }
+
+      form.reset();
+      setSucceeded(true);
+    } catch {
+      setError('No pudimos enviar tu mensaje. Intentá de nuevo o escribime por email.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <section id="contacto" className="space-y-8 pb-12">
       <div className="animate-fade-in-up">
-        <h2 className="text-2xl font-bold tracking-tight">Hablemos</h2>
-        <p className="text-slate-400">
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-teal-400">Contacto</p>
+        <h2 className="mt-2 text-3xl md:text-4xl font-bold tracking-tight">Hablemos</h2>
+        <p className="mt-2 text-slate-400">
           ¿Tenés una propuesta de trabajo, una consulta o una idea en mente? Escribime.
         </p>
       </div>
@@ -38,7 +50,7 @@ export default function Contacto() {
         <div className="animate-fade-in-up delay-100 space-y-6">
           <div>
             <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Email</h3>
-            <a href="mailto:tu.email@ejemplo.com" className="text-teal-400 transition-[color] duration-150 ease-out motion-safe:hover:text-teal-300 text-lg break-all active:opacity-80">
+            <a href="mailto:jesiagr@gmail.com" className="text-teal-400 transition-[color] duration-150 ease-out motion-safe:hover:text-teal-300 text-lg break-all active:opacity-80">
               jesiagr@gmail.com
             </a>
           </div>
@@ -48,7 +60,7 @@ export default function Contacto() {
               <a href="https://www.linkedin.com/in/jesiaguirre/" target="_blank" rel="noreferrer" className="text-slate-300 transition-[color] duration-150 ease-out motion-safe:hover:text-teal-400 inline-flex items-center gap-1 group/link active:scale-[0.97]">
                 LinkedIn <span className="inline-block transition-transform duration-150 ease-out motion-safe:group-hover/link:translate-x-0.5 motion-safe:group-hover/link:-translate-y-0.5">↗</span>
               </a>
-              <a href="https://github.com/tu-usuario" target="_blank" rel="noreferrer" className="text-slate-300 transition-[color] duration-150 ease-out motion-safe:hover:text-teal-400 inline-flex items-center gap-1 group/link active:scale-[0.97]">
+              <a href="https://github.com/Jesicagr" target="_blank" rel="noreferrer" className="text-slate-300 transition-[color] duration-150 ease-out motion-safe:hover:text-teal-400 inline-flex items-center gap-1 group/link active:scale-[0.97]">
                 GitHub <span className="inline-block transition-transform duration-150 ease-out motion-safe:group-hover/link:translate-x-0.5 motion-safe:group-hover/link:-translate-y-0.5">↗</span>
               </a>
             </div>
@@ -58,7 +70,7 @@ export default function Contacto() {
         {/* Formulario */}
         <div className="animate-fade-in-up delay-200 md:col-span-2 bg-slate-900/40 border border-slate-800/60 p-6 rounded-xl">
           {succeeded ? (
-            <div className="animate-scale-in h-full flex flex-col items-center justify-center text-center p-6 space-y-3">
+            <div className="animate-scale-in h-full flex flex-col items-center justify-center text-center p-6 space-y-3" role="status" aria-live="polite">
               <div className="w-12 h-12 rounded-full bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold">
                 ✓
               </div>
@@ -66,6 +78,10 @@ export default function Contacto() {
               <p className="text-sm text-slate-400">Gracias por escribir. Te responderé lo antes posible.</p>
               <button 
                 type="button"
+                onClick={() => {
+                  setSucceeded(false);
+                  setError(null);
+                }}
                 className="text-xs text-teal-400 transition-[color] duration-150 ease-out motion-safe:hover:text-teal-300 pt-2 active:scale-[0.97]"
               >
                 Enviar otro mensaje
@@ -73,6 +89,14 @@ export default function Contacto() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                name="_gotcha"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
               <div className="group/field">
                 <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-1 transition-[color] duration-150 ease-out group-focus-within/field:text-teal-400">Nombre</label>
                 <input
@@ -80,6 +104,7 @@ export default function Contacto() {
                   name="name"
                   id="name"
                   required
+                  autoComplete="name"
                   className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-100 outline-none transition-[border-color,box-shadow] duration-150 ease-out focus:border-teal-500 focus:ring-1 focus:ring-teal-500/30 text-sm placeholder:text-slate-700"
                   placeholder="Tu nombre"
                 />
@@ -92,6 +117,7 @@ export default function Contacto() {
                   name="email"
                   id="email"
                   required
+                  autoComplete="email"
                   className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-100 outline-none transition-[border-color,box-shadow] duration-150 ease-out focus:border-teal-500 focus:ring-1 focus:ring-teal-500/30 text-sm placeholder:text-slate-700"
                   placeholder="nombre@correo.com"
                 />
@@ -108,6 +134,12 @@ export default function Contacto() {
                   placeholder="¿En qué puedo ayudarte?"
                 ></textarea>
               </div>
+
+              {error && (
+                <p className="text-sm text-red-400" role="alert">
+                  {error}
+                </p>
+              )}
 
               <button
                 type="submit"
