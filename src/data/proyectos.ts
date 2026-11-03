@@ -30,6 +30,7 @@ export interface Proyecto {
         Testing: "Playwright, Jest",
         DevOps: "Docker, SSL automatizado (Certbot)"
       },
+      imagen: "/proyectos/inmo1.png",
       linkDemo: "https://dithurbide.org"
     },
     {
@@ -48,6 +49,7 @@ export interface Proyecto {
         Testing: "Vitest (unit), Playwright (E2E)",
         DevOps: "Git/GitHub, Angular CLI + Vite, proxy localhost:8080"
       },
+      imagen: "/proyectos/ConectarSanJose1.png",
       linkGithub: "https://github.com/Jesicagr/ConectarSanJose.git"
     },
     {
@@ -67,6 +69,7 @@ export interface Proyecto {
         Testing: "Playwright (E2E), Vitest (unit)",
         Emails: "Resend"
       },
+      imagen: "/proyectos/realstate1.png",
       linkDemo: "https://realstate.cloud"
     }
   ];
