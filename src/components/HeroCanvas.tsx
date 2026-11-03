@@ -12,10 +12,13 @@ export default function HeroCanvas() {
 
     let animationId: number;
     let cleanup: () => void = () => {};
+    let disposed = false;
 
     async function init() {
       const c = container!;
+      if (disposed || c.clientWidth === 0 || c.clientHeight === 0) return;
       const THREE = await import('three');
+      if (disposed) return;
 
       const scene = new THREE.Scene();
 
@@ -44,7 +47,8 @@ export default function HeroCanvas() {
       ctx.fillRect(0, 0, 32, 32);
       const texture = new THREE.CanvasTexture(canvas);
 
-      const count = 1800;
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const count = isMobile ? 700 : 1800;
       const positions = new Float32Array(count * 3);
       const colors = new Float32Array(count * 3);
 
@@ -83,7 +87,7 @@ export default function HeroCanvas() {
         map: texture,
         vertexColors: true,
         transparent: true,
-        opacity: 0.7,
+        opacity: 0.5,
         blending: THREE.AdditiveBlending,
         sizeAttenuation: true,
         depthWrite: false,
@@ -120,6 +124,7 @@ export default function HeroCanvas() {
 
       function animate() {
         animationId = requestAnimationFrame(animate);
+        if (document.hidden) return;
         t += 0.003;
 
         mouse.x += (target.x - mouse.x) * 0.03;
@@ -160,7 +165,9 @@ export default function HeroCanvas() {
       }
 
       animate();
-      c.style.opacity = '1';
+      if (!disposed) {
+        c.style.opacity = '1';
+      }
 
       cleanup = () => {
         window.removeEventListener('mousemove', onMouseMove);
@@ -179,6 +186,7 @@ export default function HeroCanvas() {
     init();
 
     return () => {
+      disposed = true;
       cleanup();
     };
   }, []);

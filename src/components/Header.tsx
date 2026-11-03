@@ -9,7 +9,7 @@ export default function Header() {
           Jesica Aguirre
         </a>
 
-        <nav aria-label="Navegación principal" className="flex items-center gap-1 text-sm text-slate-400 sm:gap-2">
+        <nav aria-label="Navegación principal" className="flex items-center gap-1 text-sm text-slate-300 sm:gap-2">
           <a
             href="#tecnologias"
             className="hidden rounded-md px-2 py-2 transition-colors duration-150 hover:text-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500/60 sm:block sm:px-3"

@@ -1,28 +1,31 @@
 import { tecnologiasDatos } from '@/data/proyectos';
+import Reveal from '@/components/Reveal';
 
 export default function Tecnologias() {
   return (
     <section id="tecnologias" className="space-y-8">
-      <div className="animate-fade-in-up">
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-teal-400">Stack</p>
-        <h2 className="mt-2 text-3xl md:text-4xl font-bold tracking-tight">Tecnologías</h2>
-        <p className="mt-2 text-slate-400">Las herramientas con las que trabajo día a día.</p>
-      </div>
+      <Reveal>
+        <div>
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-teal-400">Stack</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-balance">Tecnologías</h2>
+          <p className="mt-2 text-slate-300 text-pretty">Las herramientas con las que trabajo día a día.</p>
+        </div>
+      </Reveal>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {tecnologiasDatos.map((categoria, i) => (
-          <CategoriaCard key={categoria.titulo} categoria={categoria} index={i} />
+          <Reveal key={categoria.titulo} delay={i * 100} className="h-full">
+            <CategoriaCard categoria={categoria} />
+          </Reveal>
         ))}
       </div>
     </section>
   );
 }
 
-function CategoriaCard({ categoria, index }: { categoria: typeof tecnologiasDatos[number]; index: number }) {
-  const delays = ['delay-100', 'delay-200'];
-
+function CategoriaCard({ categoria }: { categoria: typeof tecnologiasDatos[number] }) {
   return (
-    <div className={`animate-fade-in-up ${delays[index]} p-6 rounded-xl bg-slate-900/50 border border-slate-800/60 space-y-4`}>
+    <div className="h-full p-6 rounded-xl bg-slate-900/80 border border-slate-800/80 space-y-4">
       <h3 className="text-lg font-semibold text-teal-400">{categoria.titulo}</h3>
       <div className="flex flex-wrap gap-2">
         {categoria.items.map((tech, i) => (

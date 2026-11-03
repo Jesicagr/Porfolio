@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import type { BufferGeometry } from 'three';
 
 interface Props {
@@ -14,6 +14,7 @@ const SHAPES = ['cube', 'octahedron', 'dodecahedron'] as const;
 export default function ProjectScene3D({ index, size = 72, className = '' }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isVisibleRef = useRef(false);
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -22,8 +23,9 @@ export default function ProjectScene3D({ index, size = 72, className = '' }: Pro
     const observer = new IntersectionObserver(
       ([entry]) => {
         isVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) setActive(true);
       },
-      { threshold: 0.3 },
+      { threshold: 0.1, rootMargin: '200px' },
     );
     observer.observe(el);
 
@@ -31,15 +33,19 @@ export default function ProjectScene3D({ index, size = 72, className = '' }: Pro
   }, []);
 
   useEffect(() => {
+    if (!active) return;
     const container = containerRef.current;
     if (!container) return;
 
     let animationId: number;
     let cleanup: () => void = () => {};
+    let disposed = false;
 
     async function init() {
       const c = container!;
+      if (disposed) return;
       const THREE = await import('three');
+      if (disposed) return;
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
@@ -90,6 +96,7 @@ export default function ProjectScene3D({ index, size = 72, className = '' }: Pro
 
       function animate() {
         animationId = requestAnimationFrame(animate);
+        if (document.hidden) return;
 
         const target = prefersReduced ? 0 : isVisibleRef.current ? 0.01 : 0.0015;
         speed += (target - speed) * 0.04;
@@ -117,8 +124,11 @@ export default function ProjectScene3D({ index, size = 72, className = '' }: Pro
     }
 
     init();
-    return () => cleanup();
-  }, [index, size]);
+    return () => {
+      disposed = true;
+      cleanup();
+    };
+  }, [active, index, size]);
 
   return (
     <div

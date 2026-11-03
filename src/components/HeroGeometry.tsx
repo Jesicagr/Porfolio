@@ -12,10 +12,13 @@ export default function HeroGeometry() {
 
     let animationId: number;
     let cleanup: () => void = () => {};
+    let disposed = false;
 
     async function init() {
       const c = container!;
+      if (disposed || c.clientWidth === 0 || c.clientHeight === 0) return;
       const THREE = await import('three');
+      if (disposed) return;
 
       const scene = new THREE.Scene();
 
@@ -169,6 +172,7 @@ export default function HeroGeometry() {
 
       function animate() {
         animationId = requestAnimationFrame(animate);
+        if (document.hidden) return;
 
         controls.update();
 
@@ -184,7 +188,9 @@ export default function HeroGeometry() {
       }
 
       animate();
-      c.style.opacity = '1';
+      if (!disposed) {
+        c.style.opacity = '1';
+      }
 
       cleanup = () => {
         window.removeEventListener('resize', onResize);
@@ -200,6 +206,7 @@ export default function HeroGeometry() {
     init();
 
     return () => {
+      disposed = true;
       cleanup();
     };
   }, []);
